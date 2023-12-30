@@ -23,6 +23,7 @@ class TicTacToe {
     private final JButton resetButton = new JButton("Reset");        
     private final JButton exitButton = new JButton("Exit");
     private final JButton styleButton = new JButton("Style");
+    private final Winner winner;
     private int currentStyleIndex;
     private int choice;
 
@@ -68,6 +69,8 @@ class TicTacToe {
         functionPanel.add(resetButton);
         functionPanel.add(exitButton);
         functionPanel.add(styleButton);
+        
+        winner = new Winner(buttons, textField);
        
 
         //add buttons to JFrame
@@ -109,7 +112,8 @@ class TicTacToe {
                             textField.setText("O Turn");
                             choice = 0;
                         }
-                        
+                        winner.checkX();
+                        winner.checkO();
                     }
                 }
             });
@@ -145,6 +149,8 @@ class TicTacToe {
                 button.setText("");
                 button.setEnabled(true);
             }
+            winner.reset();
+          
         }
         
         private void resetGame() {

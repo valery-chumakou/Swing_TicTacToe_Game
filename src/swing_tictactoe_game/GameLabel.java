@@ -18,5 +18,13 @@ public class GameLabel extends JLabel {
         setBackground(Color.orange);
         setOpaque(true);
     }
+    
+    public void setWinner(String winner) {
+        setText(winner + " Wins");
+    }
+    
+    public void setDraw() {
+        setText(" Draw");
+    }
 
 }
