@@ -23,6 +23,7 @@ class TicTacToe {
     private final JButton resetButton = new JButton("Reset");        
     private final JButton exitButton = new JButton("Exit");
     private final JButton styleButton = new JButton("Style");
+    private int currentStyleIndex;
     private int choice;
 
     public TicTacToe() {
@@ -42,6 +43,15 @@ class TicTacToe {
         //functional buttons
         resetButton.setFocusable(false);
         resetButton.setFont(new Font("MV Boli", Font.ITALIC,12));
+        resetButton.addActionListener (e -> {
+            String [] options = {"0", "X"};
+            choice = JOptionPane.showOptionDialog(frame, "Choose your token", "Token Selection", 
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+                    options[0]);
+            
+            resetGame();
+        });
+        
        
         exitButton.setFocusable(false);
         exitButton.setFont(new Font("MV Boli", Font.ITALIC,12));
@@ -49,6 +59,7 @@ class TicTacToe {
 
         styleButton.setFont(new Font("MV Boli", Font.ITALIC, 12));
         styleButton.setFocusable(false); 
+        styleButton.addActionListener(e -> changeBackgroundStyle());
         
         functionPanel.setLayout(new FlowLayout());
         functionPanel.setBounds(0, 700, 800, 100);
@@ -104,11 +115,44 @@ class TicTacToe {
             });
         }
 
-
         //option panel for choosing token
         String[] options = {"O", "X"};
         choice = JOptionPane.showOptionDialog(frame, "Choose your token", "Token Selection",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-
     }
-}
+
+        
+        private void changeBackgroundStyle() {
+            //Define the colors for different styles
+            Color [] colors = {
+                Color.DARK_GRAY,
+                Color.CYAN,
+                Color.YELLOW
+            };
+            currentStyleIndex++;
+            if (currentStyleIndex == colors.length) {
+                currentStyleIndex = 0;
+            }
+            buttonPanel.setBackground(colors[currentStyleIndex]);
+            for (JButton button : buttons) {
+                button.setBackground(colors[currentStyleIndex]);
+            }
+            
+        }
+        
+        private void resetButtons () {
+            for (JButton button : buttons) {
+                button.setText("");
+                button.setEnabled(true);
+            }
+        }
+        
+        private void resetGame() {
+            for (JButton button : buttons) {
+                resetButtons();
+                button.setText("");
+                button.setEnabled(true);
+                textField.setText("Choose you token");
+            }
+        }
+    }
