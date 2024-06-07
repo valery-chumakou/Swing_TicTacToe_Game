@@ -11,7 +11,6 @@ It is a simple Java Swing program variation of the popular game TicTacToe.
 The game will have a graphical interface that allows players to play against each other.
 
 ### Technologies
-Java
 Java Swing
 
 ### Structure
